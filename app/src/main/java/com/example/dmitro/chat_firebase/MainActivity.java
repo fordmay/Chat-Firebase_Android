@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(LAYOUT);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        userName = ANONYMOUS; /* Set default username is anonymous.*/
+//        userName = ANONYMOUS; /* Set default username is anonymous.*/
         googleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API)
@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             case R.id.sign_out_menu:
                 firebaseAuth.signOut();
                 Auth.GoogleSignInApi.signOut(googleApiClient);
-                userName = ANONYMOUS;
+//                userName = ANONYMOUS;
                 startActivity(new Intent(this, SignInActivity.class));
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

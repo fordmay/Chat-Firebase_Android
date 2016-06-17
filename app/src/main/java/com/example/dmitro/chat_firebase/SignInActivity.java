@@ -1,12 +1,12 @@
 /**
  * Copyright Google Inc. All Rights Reserved.
- * <p>
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -37,13 +37,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+public class SignInActivity extends AppCompatActivity
+        implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final int LAYOUT = R.layout.activity_sign_in;
+
     //TAG
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
+
     // Firebase instance variables
     private FirebaseAuth firebaseAuth;
 
@@ -57,27 +59,9 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
         // Initialize FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
-        // Initialize SignInButton
-        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(this);
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-    }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button:
-                signIn();
-                break;
-        }
+        initSignInButton();
+        configGoogleSignIn();
     }
 
     @Override
@@ -119,9 +103,30 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 });
     }
 
+    private void initSignInButton() {
+        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signIn();
+            }
+        });
+    }
+
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void configGoogleSignIn() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
     }
 
     @Override
