@@ -1,4 +1,4 @@
-package com.example.dmitro.chat_firebase.adapter;
+package com.example.dmitro.chat_firebase.items;
 
 public class Message {
     private String id;
@@ -7,7 +7,9 @@ public class Message {
     private String photoUrl;
 
     public Message(){
+
     }
+
     public Message(String name,String text,String photoUrl){
         this.name = name;
         this.text = text;

@@ -91,6 +91,7 @@ public class SignInActivity extends AppCompatActivity
     private void initSignInButton() {
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 signIn();

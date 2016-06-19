@@ -13,8 +13,7 @@
         <ImageView
             android:id="@+id/messenger_avatar"
             android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:src="@mipmap/ic_launcher"/>
+            android:layout_height="@dimen/avatar_size"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,14 +26,12 @@
                 android:id="@+id/messenger_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Julia"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/massage_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hello! Julia"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
     </LinearLayout>
